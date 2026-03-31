@@ -24,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+        
+        // Register User Observer
+        \App\Models\User::observe(\App\Observers\UserObserver::class);
     }
 
     /**
