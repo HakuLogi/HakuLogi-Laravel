@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
+use App\Models\User;
 
 class PermissionSeeder extends Seeder
 {
@@ -50,5 +51,28 @@ class PermissionSeeder extends Seeder
             'manage bookings',
         ]);
 
+        // Create a dummy user that also allow bypassing registration step
+        $newUserA = User::create([
+            'name' => 'SuperAdmin User',
+            'email' => 'superadmin@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $newUserB = User::create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $newUserC = User::create([
+            'name' => 'Regular User',
+            'email' => 'user@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        // Assign roles
+        $newUserA->assignRole('super_admin');
+        $newUserB->assignRole('admin');
+        $newUserC->assignRole('user');
     }
 }

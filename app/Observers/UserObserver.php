@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 class UserObserver
 {
@@ -11,7 +12,15 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        $user->assignRole('user');
+        // Check if user role have been made
+        // Deprecated unless seeder is not working properly
+        // if (!Role::where('name', 'user')->exists()) {
+        //     return;
+        // }
+
+        if (!$user->getRoleNames()->contains('user')) {
+            $user->assignRole('user');
+        }
     }
 
     /**
