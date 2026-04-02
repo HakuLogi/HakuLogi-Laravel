@@ -74,3 +74,23 @@ php artisan cache:clear
 ```
 
 If your role is an `super-admin` then there will be a user management page where you can change other users' roles.
+
+---
+
+# How to run tests?
+
+Run the following command to run all tests:
+```
+php artisan test
+```
+
+### How to run specific test?
+
+Run the following command to run a specific test:
+```
+php artisan test --filter <test_name>
+```
+
+### How to add more tests?
+
+Create a new test file in the `tests/Feature` or `tests/Unit` directory.
